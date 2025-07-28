@@ -9,7 +9,7 @@ function love.load ()
 
     camera = require 'libs.camera'
     cam = camera()
-    cam:zoom(1)
+    cam:zoom(4)
 
     sti = require 'libs/sti'
     starterMap = sti('maps/testMap.lua')
@@ -29,6 +29,7 @@ function love.load ()
     player.animations.up = anim8.newAnimation(player.grid('1-6', 6), 0.2)    -- up animation
     player.animations.down = anim8.newAnimation(player.grid('1-6', 5), 0.2)  -- down animation
 
+    -- old aimations
     -- player.spriteSheet = love.graphics.newImage('sprites/knight/with_outline/WALK.png')
     -- player.grid = anim8.newGrid(64,64, player.spriteSheet:getWidth(), player.spriteSheet:getHeight()) -- splitting sprite sheet into seperate images 5 mins into the anim8 vid
     -- player.animations = {}
