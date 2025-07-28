@@ -1,4 +1,3 @@
 *.log
-devNotes/*.DailyNotes.md
-devNotes/*.GameDesign.md
-
+devNotes/DailyNotes.md
+devNotes/GameDesign.md
