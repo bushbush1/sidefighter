@@ -9,7 +9,7 @@ function love.load ()
 
     camera = require 'libs.camera'
     cam = camera()
-    cam:zoom(1)
+    cam:zoom(4)
 
     sti = require 'libs/sti'
     starterMap = sti('maps/testMap.lua')
@@ -24,11 +24,12 @@ function love.load ()
 
 
     player.animations = {}
-    player.animations.left = anim8.newAnimation(player.grid('1-6',4), 0.2) -- left animation (first numbers is collums (how many sprites for said animation), second number is which row)
+    player.animations.left = anim8.newAnimation(player.grid('1-6',4), 0.2) -- left animation (first numbers is collums (how many sprites for  animation), second number is which row third number is speed between animation)
     player.animations.right = anim8.newAnimation(player.grid('1-6', 3), 0.2) -- right animation
-    -- player.animations.up = anim8.newAnimation(player.grid('1-8', 1), 1)    -- up animation
-    -- player.animations.down = anim8.newAnimation(player.grid('1-8', 1), 1)  -- down animation
+    player.animations.up = anim8.newAnimation(player.grid('1-6', 6), 0.2)    -- up animation
+    player.animations.down = anim8.newAnimation(player.grid('1-6', 5), 0.2)  -- down animation
 
+    -- old aimations
     -- player.spriteSheet = love.graphics.newImage('sprites/knight/with_outline/WALK.png')
     -- player.grid = anim8.newGrid(64,64, player.spriteSheet:getWidth(), player.spriteSheet:getHeight()) -- splitting sprite sheet into seperate images 5 mins into the anim8 vid
     -- player.animations = {}
@@ -55,12 +56,12 @@ function love.update(dt)  -- runs every frame dt = delta time
     end
      if love.keyboard.isDown("up") or love.keyboard.isDown("w") then
         player.y = player.y  - player.speed
-        -- player.anim = player.animations.up
+        player.anim = player.animations.up
         playerMoving = true
     end
     if love.keyboard.isDown("down") or love.keyboard.isDown("s") then
         player.y = player.y + player.speed
-        -- player.anim = player.animations.down
+        player.anim = player.animations.down
         playerMoving = true
     end
 
