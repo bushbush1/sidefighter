@@ -28,15 +28,6 @@ function love.load ()
     player.animations.right = anim8.newAnimation(player.grid('1-6', 3), 0.2) -- right animation
     player.animations.up = anim8.newAnimation(player.grid('1-6', 6), 0.2)    -- up animation
     player.animations.down = anim8.newAnimation(player.grid('1-6', 5), 0.2)  -- down animation
-
-    -- old aimations
-    -- player.spriteSheet = love.graphics.newImage('sprites/knight/with_outline/WALK.png')
-    -- player.grid = anim8.newGrid(64,64, player.spriteSheet:getWidth(), player.spriteSheet:getHeight()) -- splitting sprite sheet into seperate images 5 mins into the anim8 vid
-    -- player.animations = {}
-    -- player.animations.left = anim8.newAnimation(player.grid('1-8',1), 0.15):flipH()
-    -- player.animations.right = anim8.newAnimation(player.grid('1-8', 1), 0.15)
-    -- player.animations.up = anim8.newAnimation(player.grid('1-8', 1), 1)  -- just frame 1, slow update
-    -- player.animations.down = anim8.newAnimation(player.grid('1-8', 1), 1) -- same frame
     
     player.anim = player.animations.left
 end
