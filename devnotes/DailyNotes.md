@@ -34,6 +34,6 @@ played around with different sprites and tried to get animations for movement wo
 
 Day Five (29/07/25)
 1. **Time spent working (10.30- )**
-2. **what did i do** - added some more key bindings for playing movement (WASD).
+2. **what did i do** - added some more key bindings for playing movement (WASD). Finally added a .gitignore file
 
 **Total time spent = 8 hours~**
