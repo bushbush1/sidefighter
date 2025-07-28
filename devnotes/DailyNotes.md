@@ -28,6 +28,10 @@ played around with different sprites and tried to get animations for movement wo
 2. **what didnt work/struggled with** - today i continued to struggle with animating my charater sprite.
 3. **what i learnt** - i learnt i should really read and listen more carefully as the sprite sheet dimensions for the sheet i was using were on the website the whole time...
 
-4. **notes for tomorrow** - SET UP GIT IGNORE AND START MAKING BRANCHES, CONTINUE TO WORK ON SPRTE ANIMATION 
+4. **notes for tomorrow** - SET UP GIT IGNORE AND START MAKING BRANCHES, CONTINUE TO WORK ON SPRTE ANIMATION and use git daily...
+
+Day Five (29/07/25)
+1. **Time spent working (10.30- )**
+2. **what did i do** - added some more key bindings for playing movement (WASD)
 
 **Total time spent = 8 hours~**
