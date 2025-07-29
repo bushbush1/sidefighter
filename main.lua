@@ -78,7 +78,7 @@ function love.update(dt)
         player.anim:gotoFrame(1)
     end
 
-        world:update(dt)
+    world:update(dt)
     player.x = player.collider:getX()
     player.y = player.collider:getY()
 
