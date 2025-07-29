@@ -23,7 +23,7 @@ function love.load ()
     player.x = 25
     player.y = 15
     player.speed = 100
-    player.spriteSheet = love.graphics.newImage('sprites/multiKnight/Spritesheet_with_Shadows.png')
+    player.spriteSheet = love.graphics.newImage('sprites/multiKnight/Spritesheet_without_Shadows.png')
     player.grid = anim8.newGrid(48,48, player.spriteSheet:getWidth(), player.spriteSheet:getHeight())
 
 
@@ -120,7 +120,7 @@ function love.draw()
         biggerMap:drawLayer(biggerMap.layers["behind"])
         biggerMap:drawLayer(biggerMap.layers["Top"])
         player.anim:draw(player.spriteSheet, player.x, player.y, nil, 2,2,24,24)
-        -- world:draw()
+        world:draw()
     cam:detach()
 
     love.graphics.print("FPS: "..tostring(love.timer.getFPS( )), 10, 10)
