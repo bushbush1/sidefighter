@@ -18,11 +18,11 @@ function love.load ()
     biggerMap = sti('maps/testMap1.lua')
 
     player = {}
-    player.collider = world:newBSGRectangleCollider(25,15, 15,30,14)
+    player.collider = world:newBSGRectangleCollider(25, 15, 20, 35, 14)
     player.collider:setFixedRotation(true)
     player.x = 25
     player.y = 15
-    player.speed = 300
+    player.speed = 100
     player.spriteSheet = love.graphics.newImage('sprites/multiKnight/Spritesheet_with_Shadows.png')
     player.grid = anim8.newGrid(48,48, player.spriteSheet:getWidth(), player.spriteSheet:getHeight())
 
@@ -103,7 +103,7 @@ function love.draw()
      -- drawring the tile map in different levels
         biggerMap:drawLayer(biggerMap.layers["behind"])
         biggerMap:drawLayer(biggerMap.layers["Top"])
-        player.anim:draw(player.spriteSheet, player.x, player.y, nil, 2,2,32,32)
+        player.anim:draw(player.spriteSheet, player.x, player.y, nil, 2,2,24,24)
         world:draw()
     cam:detach()
 
