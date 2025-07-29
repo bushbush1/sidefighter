@@ -124,4 +124,5 @@ function love.draw()
     cam:detach()
 
     love.graphics.print("FPS: "..tostring(love.timer.getFPS( )), 10, 10)
+    love.graphics.print("x" .. player.x .. ", " .. "y" .. player.y, 10, 40)
 end
