@@ -11,14 +11,14 @@ function love.load ()
 
     camera = require 'libs.camera'
     cam = camera()
-    cam:zoom(1)
+    cam:zoom(3)
 
     sti = require 'libs/sti'
     starterMap = sti('maps/testMap.lua')
     biggerMap = sti('maps/testMap1.lua')
 
     player = {}
-    player.collider = world:newBSGRectangleCollider(25, 15, 20, 35, 14)
+    player.collider = world:newBSGRectangleCollider(25, 15, 15, 25, 14)
     player.collider:setFixedRotation(true)
     player.x = 25
     player.y = 15
@@ -34,9 +34,19 @@ function love.load ()
     player.animations.down = anim8.newAnimation(player.grid('1-6', 5), 0.2)  -- down animation
     
     player.anim = player.animations.left
+
+    walls = {} --creates all walls from the map usinng a table 
+    if biggerMap.layers["walls"]then
+        for i, obj in pairs(biggerMap.layers["walls"].objects)do
+            local wall = world:newRectangleCollider(obj.x, obj.y, obj.width, obj.height)
+            wall:setType('static')
+            table.insert(walls,wall)
+        end
+    end
+    
 end
 
-function love.update(dt)  -- runs every frame dt = delta time
+function love.update(dt)
     local playerMoving = false
     local vx = 0
     local vy = 0
@@ -64,12 +74,11 @@ function love.update(dt)  -- runs every frame dt = delta time
 
     player.collider:setLinearVelocity(vx,vy)
 
-    -- if the character isnt move set it to frame 1 
     if playerMoving == false then
         player.anim:gotoFrame(1)
     end
 
-    world:update(dt)
+        world:update(dt)
     player.x = player.collider:getX()
     player.y = player.collider:getY()
 
@@ -77,24 +86,31 @@ function love.update(dt)  -- runs every frame dt = delta time
 
     cam:lookAt(player.x, player.y)
 
+    -- Fixed boundary code that accounts for zoom
     local w = love.graphics.getWidth()
     local h = love.graphics.getHeight()
+    local zoom = cam.scale  -- Get current zoom level
 
-    if cam.x < w/2 then
-        cam.x = w/2
+    -- Calculate effective screen size at current zoom
+    local effectiveW = w / zoom
+    local effectiveH = h / zoom
+
+    -- Apply boundaries using the effective screen size
+    if cam.x < effectiveW/2 then
+        cam.x = effectiveW/2
     end
-    if cam.y < h/2 then
-        cam.y = h/2
+    if cam.y < effectiveH/2 then
+        cam.y = effectiveH/2
     end
 
     local mapW = biggerMap.width * biggerMap.tilewidth
     local mapH = biggerMap.height * biggerMap.tileheight
 
-    if cam.x > (mapW - w/2) then
-        cam.x = (mapW - w/2)
+    if cam.x > (mapW - effectiveW/2) then
+        cam.x = (mapW - effectiveW/2)
     end
-     if cam.y > (mapH - h/2) then
-        cam.y = (mapH - h/2)
+    if cam.y > (mapH - effectiveH/2) then
+        cam.y = (mapH - effectiveH/2)
     end
 end
 
@@ -104,7 +120,7 @@ function love.draw()
         biggerMap:drawLayer(biggerMap.layers["behind"])
         biggerMap:drawLayer(biggerMap.layers["Top"])
         player.anim:draw(player.spriteSheet, player.x, player.y, nil, 2,2,24,24)
-        world:draw()
+        -- world:draw()
     cam:detach()
 
     love.graphics.print("FPS: "..tostring(love.timer.getFPS( )), 10, 10)
