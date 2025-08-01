@@ -32,6 +32,7 @@ function love.load ()
     player.animations.right = anim8.newAnimation(player.grid('1-6', 3), 0.2) -- right animation
     player.animations.up = anim8.newAnimation(player.grid('1-6', 6), 0.2)    -- up animation
     player.animations.down = anim8.newAnimation(player.grid('1-6', 5), 0.2)  -- down animation
+    player.animations.attacking = anim8.newAnimation(player.grid('1-6',17), 0.2) -- attacking animation
     
     player.anim = player.animations.left
 
@@ -71,6 +72,20 @@ function love.update(dt)
         player.anim = player.animations.down
         playerMoving = true
     end
+
+    -- create player attack function(s)
+    -- if mouse.left.ispress then 
+        -- player attack = yes/true
+        --player animation = player attimation attacking
+        --player
+    --end 
+
+    function love.mousepressed(x, y, button, isTouch)
+    if button == 1 then  -- left mouse button
+        player.anim = player.animations.attacking
+        playerMoving = true
+    end
+end
 
     player.collider:setLinearVelocity(vx,vy)
 
@@ -124,5 +139,6 @@ function love.draw()
     cam:detach()
 
     love.graphics.print("FPS: "..tostring(love.timer.getFPS( )), 10, 10)
-    love.graphics.print("x" .. player.x .. ", " .. "y" .. player.y, 10, 40)
+    love.graphics.print("players x co-ordinate" .. player.x, 10, 40)
+    love.graphics.print("players y co-ordinate" .. player.y, 10, 70)
 end
