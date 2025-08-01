@@ -23,6 +23,7 @@ function love.load ()
     player.x = 25
     player.y = 15
     player.speed = 100
+    player.isAttacking = false -- Add attack state flag
     player.spriteSheet = love.graphics.newImage('sprites/multiKnight/Spritesheet_without_Shadows.png')
     player.grid = anim8.newGrid(48,48, player.spriteSheet:getWidth(), player.spriteSheet:getHeight())
 
@@ -48,10 +49,24 @@ function love.load ()
 end
 
 function love.update(dt)
-    local playerMoving = false
+    playerMoving = false
     local vx = 0
     local vy = 0
 
+    -- Check if attack animation is playing and finished
+    if player.isAttacking then
+        if player.anim == player.animations.attacking then
+            if player.anim.position >= #player.anim.frames then
+                -- Attack animation finished
+                player.isAttacking = false
+            else
+                -- Attack animation still playing
+                playerMoving = true
+            end
+        end
+    end
+
+    -- Movement input (can move while attacking)
     if love.keyboard.isDown("left") or love.keyboard.isDown("a") then
         vx = player.speed * -1
         player.anim = player.animations.left
@@ -72,20 +87,6 @@ function love.update(dt)
         player.anim = player.animations.down
         playerMoving = true
     end
-
-    -- create player attack function(s)
-    -- if mouse.left.ispress then 
-        -- player attack = yes/true
-        --player animation = player attimation attacking
-        --player
-    --end 
-
-    function love.mousepressed(x, y, button, isTouch)
-    if button == 1 then  -- left mouse button
-        player.anim = player.animations.attacking
-        playerMoving = true
-    end
-end
 
     player.collider:setLinearVelocity(vx,vy)
 
@@ -141,4 +142,13 @@ function love.draw()
     love.graphics.print("FPS: "..tostring(love.timer.getFPS( )), 10, 10)
     love.graphics.print("players x co-ordinate" .. player.x, 10, 40)
     love.graphics.print("players y co-ordinate" .. player.y, 10, 70)
+end
+
+function love.mousepressed(x, y, button, isTouch)
+    if button == 1 then  -- left mouse button
+        player.anim = player.animations.attacking
+        player.anim:gotoFrame(1) -- Start attack from beginning
+        player.isAttacking = true -- Set attack flag
+        playerMoving = true
+    end
 end
